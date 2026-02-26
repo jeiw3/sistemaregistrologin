@@ -61,17 +61,27 @@ body{
 
         <h4 class="text-center mb-2 brand-title">Bienvenido</h4>
         <p class="text-center text-muted mb-4">Ingresa a tu cuenta</p>
+        <?php if(session()->getFlashdata("success")):?>
+            <div class="alert alert-success" role="alert">
+                <?= session()->getFlashdata('success');?>
+            </div>
+        <?php endif?>
+           <?php if(session()->getFlashdata("error")):?>
+            <div class="alert alert-danger" role="alert">
+                <?= session()->getFlashdata('error');?>
+            </div>
+        <?php endif?>
 
         <form method="post" action="<?= base_url('/login')?>">
 
             <div class="mb-3">
                 <label class="form-label">Usuario</label>
-                <input type="text"name="usernameUs" class="form-control" placeholder="Tu usuario">
+                <input type="text"name="username" class="form-control" placeholder="Tu usuario">
             </div>
 
             <div class="mb-3">
                 <label class="form-label">Contraseña</label>
-                <input type="password" name="contraseñaUs" class="form-control" placeholder="Tu contraseña">
+                <input type="password" name="password" class="form-control" placeholder="Tu contraseña">
             </div>
 
             <div class="d-grid mb-3">

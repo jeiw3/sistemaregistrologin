@@ -61,7 +61,7 @@ body{
 <?= csrf_field() ?>
 
 <div class="mb-3">
-<input type="text" name="nombreCompleto" value="<?= old("nombreCompleto")?>"  class="form-control <?= session('errors.nombreCompleto')?'is-invalid':''?>" placeholder="Nombre completo" required maxlength="10" >
+<input type="text" name="nombreCompleto" value="<?= old("nombreCompleto")?>"  class="form-control <?= session('errors.nombreCompleto')?'is-invalid':''?>" placeholder="Nombre completo" required maxlength="25" >
 <div class="is-invalid text-danger small"><?= validation_show_error('nombreCompleto')?></div>
 </div>
 

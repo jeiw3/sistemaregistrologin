@@ -8,28 +8,50 @@ use App\Models\UsuariosModel;
 
 class Usuarios extends BaseController
 {
-    public function loginVista()
+    public function login()
     {
         return view('auth/login');
     }
 
-    public function loginUs()
-    {
-        // vista login 
-        echo "login us";
-    }
-    public function nuevoUsuarioVista(){
+     public function registro(){
         helper('form');
         return view ( 'auth/registro');
     }
 
+    public function procesarLogin()
+    {   
+        $usuariosModel=new UsuariosModel;
+        $username = $this->request->getPost('username');
+        $password = $this->request->getPost('password');
+        // funcion que validad los datos de login
+        $existeUsuario = $usuariosModel->where('username',$username)->first();
+        
+      
+        
+        
+        if($existeUsuario){
+           
+            $validarContrasena = password_verify($password,$existeUsuario->password);
+            if($validarContrasena){
+                session()->set([
+                    'usuario'=>$username,
+                    'logged'=>true
+                ]);
+                echo"se guardo la sesion";
+                
+            }else{
+                return redirect()->back()->with('error','La contraseña es invalida');
+            }
+        }else{
+                return redirect()->back()->with('error','El username no existe');
 
-    public function validarLogin(){
+        }
+        
+        
 
     }
 
-
-    public function nuevoUsuario()
+    public function procesarRegistro()
     {
         $usuarioModel= new UsuariosModel;
 
@@ -52,9 +74,10 @@ class Usuarios extends BaseController
             'password' => password_hash($this->request->getPost("password"),PASSWORD_DEFAULT),
         ];
 
+      
         $guardarUsuario= $usuarioModel->insert($data);
         if($guardarUsuario){
-            return redirect()->back()->with('success','usuario guardado exitosamente');
+            return redirect()->to('/')->with('success','usuario creado exitosamente, inicia sesión');
         }
     }       
 
