@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Panel de Administración</title>
@@ -7,6 +8,7 @@
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="bg-light">
 
     <!-- Navbar Admin -->
@@ -42,11 +44,11 @@
             <div class="card-header bg-dark text-white">
                 Gestión de Usuarios
             </div>
-            <?php if(session()->getFlashdata('success')):?>
+            <?php if (session()->getFlashdata('success')): ?>
                 <div class="alert alert-success" role="alert">
-                    <?= session()->getFlashdata('success')?>
+                    <?= session()->getFlashdata('success') ?>
                 </div>
-            <?php endif?>
+            <?php endif ?>
 
             <div class="card-body">
 
@@ -75,17 +77,20 @@
                                             </span>
                                         </td>
                                         <td class="text-center">
-                                            <?php if($usuario->role==='admin'):?>
+                                            <?php if ($usuario->role === 'admin'): ?>
                                                 <p class="text-small">Este eres tú</p>
-                                            <?php endif;?>
-                                            <?php if($usuario->role != 'admin'):?>
-                                                <a href="<?= base_url('/admin/edituser/'.$usuario->id)?>" class="btn btn-sm btn-warning">
-                                                Editar
+                                            <?php endif; ?>
+                                            <?php if ($usuario->role != 'admin'): ?>
+
+                                                <a href="<?= base_url('/admin/edituser/' . $usuario->id) ?>" class="btn btn-sm btn-warning">
+                                                    Editar
                                                 </a>
-                                                <a href="#" class="btn btn-sm btn-danger">
-                                                     Borrar
-                                                </a>
-                                            <?php endif;?>
+                                                <form action="<?= base_url('/admin/deluser/'.$usuario->id) ?>" method="POST">
+                                                    <input type="hidden" name="_method" value="DELETE">
+                                                    <button class="btn btn-sm btn-danger" type="submit">Eliminar</button>
+                                                </form>
+                                              
+                                            <?php endif; ?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>
@@ -107,4 +112,5 @@
     </div>
 
 </body>
+
 </html>

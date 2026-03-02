@@ -47,6 +47,7 @@
                         <?php endif?>
 
                         <form action="<?= base_url('admin/edituser/'.$infoUsuarioEdit->id); ?>" method="POST">
+                            <input type="hidden" name="_method" value="PUT">
                             <?= csrf_field() ?>
 
                             <!-- Nombre -->

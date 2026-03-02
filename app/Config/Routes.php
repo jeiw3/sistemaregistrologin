@@ -15,7 +15,9 @@ $routes->post('/registro','Usuarios::procesarRegistro');
 $routes->get('/dashboard/user','DashboardController::dashboards');
 $routes->get('/admin/dashboard','DashboardController::dashboards');
 $routes->get('/admin/edituser/(:num)','AdminActionsController::editUsuarioView/$1');
-$routes->post('/admin/edituser/(:num)','AdminActionsController::editUsuario/$1');
+$routes->put('/admin/edituser/(:num)','AdminActionsController::editUsuario/$1');
+$routes->delete('/admin/deluser/(:num)','AdminActionsController::delUsuario/$1');
+
 
 
 

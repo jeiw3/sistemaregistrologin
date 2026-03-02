@@ -20,7 +20,7 @@ class AuthFIlter implements FilterInterface
      *
      * @param RequestInterface $request
      * @param array|null       $arguments
-     *
+     *SELECT * FROM `tarjetas`
      * @return RequestInterface|ResponseInterface|string|void
      */
     public function before(RequestInterface $request, $arguments = null)
@@ -29,7 +29,7 @@ class AuthFIlter implements FilterInterface
             return redirect()->to('/login');
         }
 
-        $timeoutSession=60;
+        $timeoutSession=900;
 
         if (time() - session()->get('ultimaActividad') > $timeoutSession) {
             session()->remove(['role','usuario','logged','ultimaActividad']);
