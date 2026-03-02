@@ -28,6 +28,16 @@ class AuthFIlter implements FilterInterface
         if(!session()->get('logged')){
             return redirect()->to('/login');
         }
+
+        $timeoutSession=60;
+
+        if (time() - session()->get('ultimaActividad') > $timeoutSession) {
+            session()->remove(['role','usuario','logged','ultimaActividad']);
+            return redirect()->to('/login')->with('error', 'Sesión expirada');
+        }
+
+        // si sigue con la sesion se actualiza el tiempo 
+        session()->set('ultimaActividad', time());
     }
 
     /**

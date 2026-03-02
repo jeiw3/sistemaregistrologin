@@ -41,7 +41,8 @@ class Usuarios extends BaseController
                 session()->set([
                     'usuario'=>$username,
                     'logged'=>true,
-                    'role'=>$existeUsuario->role
+                    'role'=>$existeUsuario->role,
+                    'ultimaActividad'=>time()
                 ]);
 
                 if($existeUsuario->role === 'admin'){
