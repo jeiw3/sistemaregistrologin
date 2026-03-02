@@ -42,6 +42,11 @@
             <div class="card-header bg-dark text-white">
                 Gestión de Usuarios
             </div>
+            <?php if(session()->getFlashdata('success')):?>
+                <div class="alert alert-success" role="alert">
+                    <?= session()->getFlashdata('success')?>
+                </div>
+            <?php endif?>
 
             <div class="card-body">
 
@@ -70,12 +75,17 @@
                                             </span>
                                         </td>
                                         <td class="text-center">
-                                            <a href="#" class="btn btn-sm btn-warning">
+                                            <?php if($usuario->role==='admin'):?>
+                                                <p class="text-small">Este eres tú</p>
+                                            <?php endif;?>
+                                            <?php if($usuario->role != 'admin'):?>
+                                                <a href="<?= base_url('/admin/edituser/'.$usuario->id)?>" class="btn btn-sm btn-warning">
                                                 Editar
-                                            </a>
-                                            <a href="#" class="btn btn-sm btn-danger">
-                                                Borrar
-                                            </a>
+                                                </a>
+                                                <a href="#" class="btn btn-sm btn-danger">
+                                                     Borrar
+                                                </a>
+                                            <?php endif;?>
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

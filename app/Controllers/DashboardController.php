@@ -21,7 +21,7 @@ class DashboardController extends BaseController
                 return view('dashboard/dashboardUser',$data);
             }else if(session()->get('role'==='admin')){
                 $usuariosAppModel=  new UsuariosModel;
-                $usuariosApp= $usuariosAppModel->select('nombreCompleto,username,email,role')->findAll();
+                $usuariosApp= $usuariosAppModel->select('id,nombreCompleto,username,email,role')->findAll();
                 $data+=[
                     'usuariosApp'=>$usuariosApp,
                 ];

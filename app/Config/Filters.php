@@ -74,8 +74,7 @@ class Filters extends BaseFilters
      */
     public array $globals = [
         'before' => [
-            // 'honeypot',
-            // 'csrf',
+            'auth'=>['except'=>['/','/login','/registro']]
             // 'invalidchars',
         ],
         'after' => [
@@ -108,5 +107,8 @@ class Filters extends BaseFilters
      *
      * @var array<string, array<string, list<string>>>
      */
-    public array $filters = [];
+    public array $filters = [
+        // filtro para que se valide el rol de admin en cada ruta admin/*
+        'adminFilter'=>['before'=>['admin/*']]
+    ];
 }
