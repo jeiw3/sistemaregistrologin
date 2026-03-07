@@ -23,6 +23,9 @@ $routes->delete('/admin/deluser/(:num)','AdminActionsController::delUsuario/$1')
 
 $routes->post('/logout','Usuarios::logout');
 
+$routes->group('api',function($routes){
+    $routes->resource('users',['controller'=>'API\Users']);
+});
 
 
 
